@@ -1,0 +1,23 @@
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Sensor</th>
+      <th scope="col">Tipo</th>
+      <th scope="col">valor</th>
+      <th scope="col">Fecha</th>
+    </tr>
+  </thead>
+  
+{{#each sensores}}
+  <tbody>
+    <tr class="table-active">
+      <th scope="row">{{title}}</th>
+      <td>{{tipo}}</td>
+      <td>{{valor}}</td>
+      <td>{{updatedAt}}</td>
+    </tr>
+
+{{/each}}
+  </tbody>
+</table> 

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container">
-    <a class="navbar-brand" href="/">Next IoT</a>
+    <a class="navbar-brand" href="/">Next TyS</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -17,11 +17,15 @@
         {{#if user}}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Notes 
+              Ir A 
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="/notes">All Notes</a>
               <a class="dropdown-item" href="/notes/add">Add A Note</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/sensores/datos-sensores">Ver datos sensores</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/sensores/graficar-sensores">Grafica sensores</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="/users/logout">Logout</a>
             </div>
