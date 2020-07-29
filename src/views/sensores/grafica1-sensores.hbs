@@ -1,53 +1,202 @@
-<pre>
-    {{dat}}
-</pre>
+<html>
+    <head>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/highcharts-more.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+        <figure class="highcharts-figure">
+            <div id="container" style width = 20px></div>
+            <p class="highcharts-description">
+                This chart shows how data labels can be added to the data series. This
+                can increase readability and comprehension for small datasets.
+            </p>
+            <div id="container2"></div>
+            <p class="highcharts-description">
+                This chart shows how data labels can be added to the data series. This
+                can increase readability and comprehension for small datasets.
+            </p>
+        </figure>
+        
+        {{!-- <meta http-equiv="refresh" content="20"> --}}
+        
+    </head>
 
-<canvas id="myChart" width="400" height="400"></canvas>
+    <body>
+        
+
+    </body>
+
     <script>
-      var pollOptions = "{{{lab}}}";
-      var pollData = "{{{dat}}}";
-      createChart("mychart",pollOptions,pollData);
-    </script>
+        
+        var datos = [];
+        
+        var fecha = []; 
+        var actualdato = 0;
+        var i=0;
+        {{#each sensores}}
+            datos[i]={{s_temperatura}};
+            fecha[i]="{{createdAt}}";
+            i=i+1;
+            actualdato = {{s_temperatura}};
+        {{/each}}
 
-<script>
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: pollOptions,
-        datasets: [{
-            label: '# of Votes',
-            data: pollData,
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
+  
+       
+        Highcharts.chart('container', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Monthly Average Temperature'
+            },
+            subtitle: {
+                text: 'Source: WorldClimate.com'
+            },
+            xAxis: {
+                categories: fecha
+            },
+            yAxis: {
+                title: {
+                    text: 'Temperature (°C)'
+                }
+            },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: true
+                    },
+                    enableMouseTracking: false
+                }
+            },
+            series: [{
+                name: 'Tokyo',
+                data: datos
+            }]
+        });
+        
+        /*Otro*/
+        Highcharts.chart('container2', {
+
+            chart: {
+                type: 'gauge',
+                plotBackgroundColor: null,
+                plotBackgroundImage: null,
+                plotBorderWidth: 0,
+                plotShadow: false
+            },
+
+            title: {
+                text: 'Temperatura Actual'
+            },
+
+            pane: {
+                startAngle: -150,
+                endAngle: 150,
+                background: [{
+                    backgroundColor: {
+                        linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                        stops: [
+                            [0, '#FFF'],
+                            [1, '#333']
+                        ]
+                    },
+                    borderWidth: 0,
+                    outerRadius: '109%'
+                }, {
+                    backgroundColor: {
+                        linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                        stops: [
+                            [0, '#333'],
+                            [1, '#FFF']
+                        ]
+                    },
+                    borderWidth: 1,
+                    outerRadius: '107%'
+                }, {
+                    // default background
+                }, {
+                    backgroundColor: '#DDD',
+                    borderWidth: 0,
+                    outerRadius: '105%',
+                    innerRadius: '103%'
+                }]
+            },
+
+            // the value axis
+            yAxis: {
+                min: 0,
+                max: 200,
+
+                minorTickInterval: 'auto',
+                minorTickWidth: 1,
+                minorTickLength: 10,
+                minorTickPosition: 'inside',
+                minorTickColor: '#666',
+
+                tickPixelInterval: 30,
+                tickWidth: 2,
+                tickPosition: 'inside',
+                tickLength: 10,
+                tickColor: '#666',
+                labels: {
+                    step: 2,
+                    rotation: 'auto'
+                },
+                title: {
+                    text: '°C'
+                },
+                plotBands: [{
+                    from: 0,
+                    to: 120,
+                    color: '#55BF3B' // green
+                }, {
+                    from: 120,
+                    to: 160,
+                    color: '#DDDF0D' // yellow
+                }, {
+                    from: 160,
+                    to: 200,
+                    color: '#DF5353' // red
+                }]
+            },
+
+            series: [{
+                name: 'Temperatura',
+                data: [actualdato],
+                tooltip: {
+                    valueSuffix: ' °C'
                 }
             }]
-        }
-    }
-});
 
-</script> 
+        },
+        // Add some life
+        function (chart) {
+            if (!chart.renderer.forExport) {
+                setInterval(function () {
+                    var point = chart.series[0].points[0],
+                        newVal,
+                        inc = Math.round((Math.random() - 0.5) * 20);
+
+                    newVal = point.y + inc;
+                    if (newVal < 0 || newVal > 200) {
+                        newVal = point.y - inc;
+                    }
+
+                    point.update(newVal);
+
+                }, 3000);
+            }
+        });
+
+       
+    </script>
+ </section>
+<script>
+
+
+</script>
+
+    
+</html>

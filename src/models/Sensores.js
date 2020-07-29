@@ -10,8 +10,12 @@ const SensoresSchema = new Schema(
       type: String,
       required: false
     },
-    valor: {
-      type: Number,
+    s_temperatura: {
+      type: String,
+      required: false
+    },
+    s_humedad: {
+      type: String,
       required: false
     },
     user: {
@@ -24,4 +28,4 @@ const SensoresSchema = new Schema(
   }
 );
 
-module.exports = model("Sensores", SensoresSchema);
+module.exports = model("sensoresmoto", SensoresSchema);

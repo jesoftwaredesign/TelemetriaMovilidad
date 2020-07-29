@@ -8,25 +8,33 @@ notesCtrl.renderNoteForm = (req, res) => {
 };
 
 notesCtrl.createNewNote = async (req, res) => {
-  const { title, description } = req.body;
+  const { title, tipo, ubicacion, description } = req.body;
   const errors = [];
   if (!title) {
-    errors.push({ text: "Please Write a Title." });
+    errors.push({ text: "Por favor indique un nombre" });
+  }
+  if (!tipo) {
+    errors.push({ text: "Por favor indique un tipo" });
+  }
+  if (!ubicacion) {
+    errors.push({ text: "Por favor indique la ubicación" });
   }
   if (!description) {
-    errors.push({ text: "Please Write a Description" });
+    errors.push({ text: "Por favor indique una descripción" });
   }
   if (errors.length > 0) {
     res.render("notes/new-note", {
       errors,
       title,
+      tipo,
+      ubicacion,
       description
     });
   } else {
-    const newNote = new Note({ title, description });
+    const newNote = new Note({ title, tipo, ubicacion, description });
     newNote.user = req.user.id;
     await newNote.save();
-    req.flash("success_msg", "Note Added Successfully");
+    req.flash("success_msg", "Sensor adicionado correctamente");
     res.redirect("/notes");
   }
 };
@@ -46,15 +54,15 @@ notesCtrl.renderEditForm = async (req, res) => {
 };
 
 notesCtrl.updateNote = async (req, res) => {
-  const { title, description } = req.body;
-  await Note.findByIdAndUpdate(req.params.id, { title, description });
-  req.flash("success_msg", "Note Updated Successfully");
+  const { title, tipo, ubicacion, description } = req.body;
+  await Note.findByIdAndUpdate(req.params.id, { title, tipo, ubicacion, description });
+  req.flash("success_msg", "Sensor actualizado correctamente");
   res.redirect("/notes");
 };
 
 notesCtrl.deleteNote = async (req, res) => {
   await Note.findByIdAndDelete(req.params.id);
-  req.flash("success_msg", "Note Deleted Successfully");
+  req.flash("success_msg", "Sensor eliminado correctamente");
   res.redirect("/notes");
 };
 

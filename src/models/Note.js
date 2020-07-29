@@ -6,6 +6,14 @@ const NoteSchema = new Schema(
       type: String,
       required: true
     },
+    tipo: {
+      type: String,
+      required: true
+    },
+    ubicacion: {
+      type: String,
+      required: true
+    },
     description: {
       type: String,
       required: true
@@ -20,4 +28,4 @@ const NoteSchema = new Schema(
   }
 );
 
-module.exports = model("Note", NoteSchema);
+module.exports = model("sensores", NoteSchema);
