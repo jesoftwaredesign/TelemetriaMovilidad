@@ -2,23 +2,11 @@ const { Schema, model } = require("mongoose");
 
 const SensoresSchema = new Schema(
   {
-    title: {
+    sensor_codigo: {
       type: String,
       required: false
     },
-    tipo: {
-      type: String,
-      required: false
-    },
-    s_temperatura: {
-      type: String,
-      required: false
-    },
-    s_humedad: {
-      type: String,
-      required: false
-    },
-    user: {
+    valor_sensor: {
       type: String,
       required: false
     }
@@ -28,4 +16,4 @@ const SensoresSchema = new Schema(
   }
 );
 
-module.exports = model("sensoresmoto", SensoresSchema);
+module.exports = model("datossensores", SensoresSchema);

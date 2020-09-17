@@ -6,6 +6,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 const morgan = require('morgan');
+var body_parser = require('body-parser');
 
 // Initializations
 const app = express();
@@ -47,10 +48,13 @@ app.use((req, res, next) => {
 // routes
 app.use(require('./routes/index.routes'));
 app.use(require('./routes/users.routes'));
-app.use(require('./routes/notes.routes'));
-app.use(require('./routes/sensores.routes'));
+app.use(require('./routes/motos.routes'));
+
+//app.use(require('./routes/notes.routes'));
+
+//app.use(require('./routes/sensores.routes'));
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(body_parser.urlencoded({extended:true}));
 module.exports = app;
