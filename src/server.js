@@ -1,3 +1,5 @@
+
+//requerimientos a instalar con NPM
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
@@ -13,7 +15,7 @@ const app = express();
 require('./config/passport');
 
 // settings
-app.set('port', process.env.PORT || 4000);
+app.set('port', process.env.PORT || 4000); //puerto para el servidor localhost:4000
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.hbs', exphbs({
   defaultLayout: 'main',
@@ -49,10 +51,6 @@ app.use((req, res, next) => {
 app.use(require('./routes/index.routes'));
 app.use(require('./routes/users.routes'));
 app.use(require('./routes/motos.routes'));
-
-//app.use(require('./routes/notes.routes'));
-
-//app.use(require('./routes/sensores.routes'));
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));

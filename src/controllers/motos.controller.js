@@ -1,13 +1,15 @@
 const motosCtrl = {};
 
-// Models
+// Models de datos usados en el controlador para guardar en MONGO
 const Motos = require("../models/SensoresMoto");
 const Sensores = require("../models/Sensores");
 
+//Lleva al formulario de nuevo sensor
 motosCtrl.renderMotoSensorForm = (req, res) => {
     res.render("motos/new-motos");
 };
 
+//Guarda los datos del nuevo sensor
 motosCtrl.createNewMotoSensor = async (req, res) => {
     const { title, tipo, moto_codigo } = req.body;
     const errors = [];
@@ -39,18 +41,20 @@ motosCtrl.createNewMotoSensor = async (req, res) => {
 
 };
 
+//Redirecciona para mostrar todos los sensores creados
 motosCtrl.renderSensorMotos = async (req, res) => {
   const motos = await Motos.find({ user: req.user.id }).sort({ date: "desc" });
   res.render("motos/all-sensores", { motos });
 };
 
+//Redirecciona a formulario de edición de datos de sensores
 motosCtrl.updateMotoSensor = async (req, res) => {
     const sensor = await Motos.findById(req.params.id);
     console.log(sensor)
     res.render('motos/edit-sensores', sensor);
   };
 
-
+//Guarda cambios de sensores en base de datos
 motosCtrl.editarSensorMoto = async (req, res) => { 
   const idSensor = req.body.moto_codigo;
   console.log(req);
@@ -65,7 +69,7 @@ motosCtrl.editarSensorMoto = async (req, res) => {
     
 }
 
-
+//EJEMPLO 1 - REGISTRA DATOS RECIBIDOS DE SENSOR MEDIANTE HTTP
 motosCtrl.addValorSensor = async (req,res) => {
     //CODIGO RECEPCIÓN DE MODULO ESP32 - CON SENSOR DHT11
     //String datos_a_enviar en arduino = "http://192.168.1.12:4000/motos/add/" + clavesensor + "," + valor;
@@ -150,6 +154,7 @@ client.write('motos')
     //res.send('render edit form recibiendo valor')
 }
 
+//EJEMPLO 2 - REGISTRA DATOS RECIBIDOS DE SENSOR MEDIANTE HTTP
 motosCtrl.addValorWireless = async (req, res) => {
   //CODIGO RECEPCIÓN con MODULO GSM Y GPS
   //String datos_a_enviar en arduino = "http://192.168.1.12:4000/motos/add/" + clavesensor + "," + valor;
@@ -273,7 +278,7 @@ motosCtrl.addValorWireless = async (req, res) => {
 
   } 
 
-
+//EJEMPLO 1 - REGISTRA DATOS RECIBIDOS DE SENSOR MEDIANTE HTTP
 motosCtrl.postValorWireless = async (req, res) => {
     //CODIGO RECEPCIÓN con MODULO GSM Y GPS
     ///http://201.232.243.242:4000/motos/postadd/{"antlat":"1613.99","date":"2019-3-13","eorw":"W","hour":"18:32:11","latitude":"0614.700351","longitude":"07533.027631","nors":"N","uaam":"M"}

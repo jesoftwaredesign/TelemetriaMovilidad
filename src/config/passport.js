@@ -1,8 +1,12 @@
+
+//USO del paquete passport para encriptar contraseñas
+
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 const User = require('../models/User'); 
 
+//se emplea el email como identificador de usuario, para verficiar que no esté registrado
 passport.use(new LocalStrategy({
   usernameField: 'email'
 }, async (email, password, done) => {

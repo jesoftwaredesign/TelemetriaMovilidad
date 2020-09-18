@@ -1,4 +1,4 @@
-//SE ARRANCA CON npm run dev oooooooo npm start 
+//SE ARRANCA SERVIDOR CON npm run dev o npm start 
 
 const app = require('./server');
 require('./database');

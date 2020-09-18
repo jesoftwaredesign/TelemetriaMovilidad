@@ -12,7 +12,11 @@ usersCtrl.renderSignUpForm = (req, res) => {
 
 usersCtrl.singup = async (req, res) => {
   let errors = [];
-  const { name, email, password, confirm_password } = req.body;
+  const { name, email, password, confirm_password,claveregistro } = req.body;
+  //clave de registro para no permitir registros no deseados
+  if (claveregistro != "energetica2030*") {
+    errors.push({ text: "Clave de registro no coincide" });
+  }
   if (password != confirm_password) {
     errors.push({ text: "Passwords do not match." });
   }
@@ -22,6 +26,7 @@ usersCtrl.singup = async (req, res) => {
   if (errors.length > 0) {
     res.render("users/signup", {
       errors,
+      claveregistro,
       name,
       email,
       password,

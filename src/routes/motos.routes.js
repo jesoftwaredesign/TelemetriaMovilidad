@@ -9,7 +9,6 @@ const {
   updateMotoSensor,
   editarSensorMoto,
   addValorSensor,
-  iraDashboard1,
   addValorWireless,
   postValorWireless
   
@@ -33,8 +32,7 @@ router.get('/motos/add/:valor', addValorSensor);
 //recibir los valores desde equipo wireless
 router.get('/motos/addwireless/:valor', addValorWireless);
 
-//ir a dashboard 1
-router.get("/motos/dashboard1", iraDashboard1);
+
 
 
 module.exports = router;
