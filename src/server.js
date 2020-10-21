@@ -1,6 +1,7 @@
 
 //requerimientos a instalar con NPM
 const express = require('express');
+var nodemailer = require('nodemailer');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const methodOverride = require('method-override');
@@ -9,6 +10,8 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const morgan = require('morgan');
 var body_parser = require('body-parser');
+
+
 
 // Initializations
 const app = express();

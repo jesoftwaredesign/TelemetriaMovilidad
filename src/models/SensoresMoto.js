@@ -2,19 +2,19 @@ const { Schema, model } = require("mongoose");
 
 const SensoresMotoSchema = new Schema(
   {
-    title: {
+    name: {
       type: String,
       required: false
     },
-    tipo: {
+    ubicacion: {
       type: String,
       required: false
     },
-    moto_s1: {
+    info: {
       type: String,
       required: false
     },
-    moto_codigo: {
+    sensor_codigo: {
       type: String,
       required: false
     },

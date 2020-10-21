@@ -3,9 +3,8 @@
   <thead>
     <tr>
       <th scope="col">Nombre</th>
-      <th scope="col">Tipo</th>
-      <th scope="col">Clave</th>
-      <th scope="col">Fecha creación</th>
+      <th scope="col">Ubicación</th>
+      <th scope="col">Token</th>
       <th scope="col">Editar</th>
     </tr>
   </thead>
@@ -13,13 +12,13 @@
 {{#each motos}}
   <tbody>
     <tr class="table-active">
-      <th scope="row">{{title}}</th>
-      <td>{{tipo}}</td>
-      <td>{{_id}}</td>
-      <td>{{updatedAt}}</td>
+      <th scope="row">{{name}}</th>
+      <td>{{ubicacion}}</td>
+      <td>{{sensor_codigo}}</td>
       <td><a href='/motos/edit-sensor/{{_id}}' class = "btn btn-success">Editar</a></td>
     </tr>
 
 {{/each}}
   </tbody>
 </table> 
+<iframe src="http://localhost:3000/d-solo/_WL5tBSGz/motocicleta-dashboard1?orgId=1&from=1600827104381&to=1600827611016&panelId=2" width="450" height="200" frameborder="0"></iframe>

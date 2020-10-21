@@ -10,4 +10,7 @@ indexCtrl.renderAbout = (req, res) => {
   res.render('about');
 };
 
+indexCtrl.renderHome = (req, res) => {
+  res.render('home');
+};
 module.exports = indexCtrl;
