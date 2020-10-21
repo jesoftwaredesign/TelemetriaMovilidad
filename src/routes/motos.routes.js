@@ -33,6 +33,4 @@ router.get('/motos/add/:valor', addValorSensor);
 router.get('/motos/addwireless/:valor', addValorWireless);
 
 
-
-
 module.exports = router;
